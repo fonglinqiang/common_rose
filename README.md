@@ -9,3 +9,11 @@ source venv/bin/activate
 pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 pip install -U scikit-learn
 ```
+
+# Dataset
+Download dataset from
+https://www.kaggle.com/datasets/gpreda/chinese-mnist/download?datasetVersionNumber=7
+Unzip downloaded
+``` shell
+unzip archive.zip
+```
