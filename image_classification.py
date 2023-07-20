@@ -51,7 +51,7 @@ class CommonRoseNet(nn.Module):
         self.pool1 = nn.MaxPool2d(2, 2)
         self.conv2 = nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=1)
         self.pool2 = nn.MaxPool2d(2, 2)
-        self.fc = nn.Linear(32 * 16 * 16, 10)
+        self.fc = nn.Linear(32 * 16 * 16, 15)
 
     def forward(self, x):
         x = self.pool1(torch.relu(self.conv1(x)))
@@ -77,7 +77,7 @@ def train(dataloader, model, loss_fn, optimizer):
         optimizer.step()
         optimizer.zero_grad()
 
-        if batch % 30 == 0:
+        if batch % 100 == 0:
             loss, current = loss.item(), (batch + 1) * len(X)
             print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
 
@@ -125,4 +125,8 @@ if __name__ == "__main__":
     train_dataloader = DataLoader(train_dataset, batch_size=batch_size)
     test_dataloader = DataLoader(test_dataset)
 
-    
+    for t in range(epochs):
+        print(f"Epoch {t+1}\n-------------------------------")
+        train(train_dataloader, model, loss_fn, optimizer)
+        test(test_dataloader, model, loss_fn)
+    print("Done!")
