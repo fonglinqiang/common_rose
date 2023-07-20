@@ -6,6 +6,8 @@ from torch.utils.data import DataLoader, Dataset
 from torchvision.io import read_image
 from sklearn.model_selection import train_test_split
 
+device = "cpu"
+
 # custom pytorch dataset class
 class CustomImageDataset(Dataset):
     def __init__(self, root, file_name_list, train=True, test_size=0.3, random_state=42, transform = None):
@@ -59,6 +61,25 @@ class CommonRoseNet(nn.Module):
         return x
 
 # training function
+def train(dataloader, model, loss_fn, optimizer):
+    size = len(dataloader.dataset)
+    model.train()
+    for batch, (X, y) in enumerate(dataloader):
+        # print(X, y)
+        X, y = X.to(device), y.to(device)
+
+        # Compute prediction error
+        pred = model(X)
+        loss = loss_fn(pred, y)
+
+        # Backpropagation
+        loss.backward()
+        optimizer.step()
+        optimizer.zero_grad()
+
+        if batch % 30 == 0:
+            loss, current = loss.item(), (batch + 1) * len(X)
+            print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
 
 # testing function
 
