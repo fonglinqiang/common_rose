@@ -1,2 +1,11 @@
 # common_rose
-This is an image classification project designed for assessing junior data scientist candidates for hire
+This is an image classification project designed for assessing junior data scientist candidates for hire.
+The name common_rose is one of the butterfly species found in Singapore. The company im working for also have its name inspired by a endangered butterfly species.
+
+# Setup Environment
+``` shell
+python -m venv venv
+source venv/bin/activate
+pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+pip install -U scikit-learn
+```
