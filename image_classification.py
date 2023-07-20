@@ -1,6 +1,7 @@
 # import libraries
 import os
 import torch
+import torch.nn as nn
 from torch.utils.data import DataLoader, Dataset
 from torchvision.io import read_image
 from sklearn.model_selection import train_test_split
@@ -41,6 +42,21 @@ class CustomImageDataset(Dataset):
         return image.to(torch.float32), label
 
 # design a simple cnn model
+class CommonRoseNet(nn.Module):
+    def __init__(self):
+        super(CommonRoseNet, self).__init__()
+        self.conv1 = nn.Conv2d(1, 16, kernel_size=3, stride=1, padding=1)
+        self.pool1 = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=1)
+        self.pool2 = nn.MaxPool2d(2, 2)
+        self.fc = nn.Linear(32 * 16 * 16, 10)
+
+    def forward(self, x):
+        x = self.pool1(torch.relu(self.conv1(x)))
+        x = self.pool2(torch.relu(self.conv2(x)))
+        x = x.view(x.size(0), -1)
+        x = self.fc(x)
+        return x
 
 # training function
 
@@ -50,6 +66,7 @@ class CustomImageDataset(Dataset):
 if __name__ == "__main__":
 
     root_folder = 'data/data'
+    batch_size=64
 
     image_filename_list = os.listdir(root_folder)
 
@@ -66,3 +83,7 @@ if __name__ == "__main__":
         test_size=0.2
         )
     
+    train_dataloader = DataLoader(train_dataset, batch_size=batch_size)
+    test_dataloader = DataLoader(test_dataset)
+
+    model = CommonRoseNet()
