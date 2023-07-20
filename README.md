@@ -1,6 +1,6 @@
 # common_rose
 This is an image classification project designed for assessing junior data scientist candidates for hire.
-The name common_rose is one of the butterfly species found in Singapore. The company im working for also have its name inspired by a endangered butterfly species.
+The name common_rose is one of the butterfly species found in Singapore. The company im working for also have its name inspired by a endangered butterfly species. Naming in this way makes it harder for potential candidate to find this repo.
 
 # Setup Environment
 ``` shell
