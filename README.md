@@ -11,8 +11,7 @@ pip install -U scikit-learn
 ```
 
 # Dataset
-Download dataset from
-https://www.kaggle.com/datasets/gpreda/chinese-mnist/download?datasetVersionNumber=7
+Download dataset from [Kaggle](https://www.kaggle.com/datasets/gpreda/chinese-mnist/download?datasetVersionNumber=7)
 
 Unzip downloaded dataset
 ``` shell
