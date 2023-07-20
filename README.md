@@ -22,3 +22,4 @@ unzip archive.zip
 ``` shell
 python image_classification.py
 ```
+best_model.pth will be updated when accuracy of test dataset is better than previous during training loop
