@@ -17,3 +17,8 @@ Unzip downloaded
 ``` shell
 unzip archive.zip
 ```
+
+# Run Script
+``` shell
+python image_classification.py
+```
