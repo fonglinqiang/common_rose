@@ -3,3 +3,4 @@ archive.zip
 /data
 chinese_mnist.csv
 chinese_mnist.tfrecords
+best_model.pth

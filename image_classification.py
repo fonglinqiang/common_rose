@@ -77,7 +77,7 @@ def train(dataloader, model, loss_fn, optimizer):
         optimizer.step()
         optimizer.zero_grad()
 
-        if batch % 100 == 0:
+        if batch % 30 == 0:
             loss, current = loss.item(), (batch + 1) * len(X)
             print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
 
@@ -95,7 +95,8 @@ def test(dataloader, model, loss_fn):
             correct += (pred.argmax(1) == y).type(torch.float).sum().item()
     test_loss /= num_batches
     correct /= size
-    print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
+    print(f"Test Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
+    return correct
 
 # main
 if __name__ == "__main__":
@@ -125,8 +126,15 @@ if __name__ == "__main__":
     train_dataloader = DataLoader(train_dataset, batch_size=batch_size)
     test_dataloader = DataLoader(test_dataset)
 
+    best_accuracy = 0.0
     for t in range(epochs):
         print(f"Epoch {t+1}\n-------------------------------")
         train(train_dataloader, model, loss_fn, optimizer)
-        test(test_dataloader, model, loss_fn)
+        cur_accuracy = test(test_dataloader, model, loss_fn)
+
+        if cur_accuracy > best_accuracy:
+            print(f'best_model.pth has been updated\n')
+            torch.save(model.state_dict(), 'best_model.pth')
+            best_accuracy = cur_accuracy
     print("Done!")
+
