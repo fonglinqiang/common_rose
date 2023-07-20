@@ -23,3 +23,6 @@ unzip archive.zip
 python image_classification.py
 ```
 best_model.pth will be updated when accuracy of test dataset is better than previous during training loop
+
+# Further Improvement
+Candidates can use different PyTorch transform function during training to improve on testing accuracy
