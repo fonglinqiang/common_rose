@@ -1,0 +1,5 @@
+/venv
+archive.zip
+/data
+chinese_mnist.csv
+chinese_mnist.tfrecords
